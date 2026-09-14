@@ -33,16 +33,13 @@ body{font-family:"Times New Roman",serif;background:#3d3d3d;padding:20px;display
 .chk input{margin-top:4px;width:18px;height:18px;accent-color:#8b0000}
 
 .sigblock{margin-top:35px;position:relative;z-index:1;border:1px dashed #999;padding:15px;background:rgba(255,255,255,.4)}
-.sigblock .lbl{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#555;font-weight:bold;margin-bottom:8px}
-.sigrow{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.sigblock .lbl{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#555;font-weight:bold;margin-bottom:12px}
+.sigrow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
 .sigrow input{flex:1;min-width:180px;border:none;border-bottom:1px solid #333;background:transparent;font-family:"Times New Roman",serif;font-size:18px;padding:6px 4px;outline:none;font-style:italic}
 .sigrow input:focus{border-bottom:2px solid #8b0000}
-.btn-sign{font-family:"Times New Roman",serif;font-size:13px;padding:8px 18px;border:2px solid #1a3a8b;background:#1a3a8b;color:#fff;cursor:pointer;letter-spacing:1px;text-transform:uppercase;font-weight:bold;transition:.2s}
-.btn-sign:hover{background:#26489e}
-.btn-sign.signed{background:#2e7d32;border-color:#2e7d32}
-.sig-preview{margin-top:10px;font-size:12px;color:#2e7d32;font-style:italic;display:none}
-.sig-date{display:flex;justify-content:space-between;margin-top:15px;font-size:12px;color:#555}
-.sig-date .dl{border-bottom:1px solid #333;width:200px;text-align:center;padding-bottom:4px}
+.sig-date{display:flex;justify-content:space-between;margin-top:15px;font-size:12px;color:#555;gap:15px}
+.sig-date .dbox{border-bottom:1px solid #333;padding-bottom:4px;flex:1}
+.sig-date .dbox span{font-size:11px;color:#777;font-style:italic}
 
 .act{margin-top:40px;display:flex;gap:15px;justify-content:center;flex-wrap:wrap;position:relative;z-index:5}
 .btn{font-family:"Times New Roman",serif;font-size:15px;padding:12px 32px;border:2px solid #8b0000;background:#8b0000;color:#fff;cursor:pointer;letter-spacing:2px;text-transform:uppercase;font-weight:bold;transition:.2s}
@@ -52,9 +49,14 @@ body{font-family:"Times New Roman",serif;background:#3d3d3d;padding:20px;display
 .btn.blue{background:#1a3a8b;border-color:#1a3a8b}
 .btn.blue:hover{background:#26489e;box-shadow:0 5px 15px rgba(26,58,139,.4)}
 
-.res{margin-top:30px;padding:20px;border:2px dashed #8b0000;background:#fff5f5;display:none;font-size:15px;position:relative;z-index:1}
-.res h3{color:#8b0000;margin-bottom:10px;letter-spacing:2px}
-.res pre{white-space:pre-wrap;font-family:"Times New Roman",serif;line-height:1.6}
+/* Экран зарегистрированного заявления */
+.done{display:none;position:relative;z-index:1}
+.done h2{text-align:center;font-size:24px;letter-spacing:5px;text-transform:uppercase;color:#2e7d32;border:3px solid #2e7d32;padding:14px;margin-bottom:30px;border-radius:6px;background:rgba(46,125,50,.06)}
+.done .doc{font-size:15px;line-height:1.8;white-space:pre-wrap;font-family:"Times New Roman",serif;border:1px solid #333;padding:25px 30px;background:rgba(255,255,255,.6)}
+.done .doc .num{color:#8b0000;font-weight:bold;margin-bottom:15px;font-size:14px;letter-spacing:1px}
+.done .doc .center{text-align:center;font-weight:bold;letter-spacing:6px;font-size:20px;text-transform:uppercase;margin:25px 0;text-decoration:underline;text-underline-offset:6px}
+.done .doc .right{text-align:right;margin-bottom:20px}
+.done .doc .sig-line{margin-top:30px}
 
 .archive{display:none;position:relative;z-index:1}
 .archive h2{text-align:center;font-size:22px;letter-spacing:4px;text-transform:uppercase;margin-bottom:25px;border-bottom:2px solid #000;padding-bottom:12px}
@@ -64,11 +66,12 @@ body{font-family:"Times New Roman",serif;background:#3d3d3d;padding:20px;display
 .card .who b{font-weight:bold}
 .card .when{font-size:11px;color:#777;position:absolute;top:12px;right:15px}
 .card .snippet{font-size:13px;color:#444;font-style:italic;margin:8px 0 10px;line-height:1.4}
+.card .sig{font-size:12px;color:#2e7d32;font-style:italic;margin-top:6px}
 .card .del{position:absolute;bottom:12px;right:15px;font-size:11px;color:#c62828;cursor:pointer;background:none;border:none;font-family:inherit;text-decoration:underline;padding:0}
 .card .del:hover{color:#8b0000}
 .empty{text-align:center;padding:40px 20px;color:#777;font-style:italic;font-size:15px}
 
-@media(max-width:700px){.paper{padding:35px 25px}.paper::after{font-size:110px;letter-spacing:15px}.stamp{width:110px;height:110px;bottom:30px;right:20px;font-size:9px;padding:10px}.stamp .big{font-size:14px}.stamp .org,.stamp .sub{font-size:7px}.header h1{font-size:15px;letter-spacing:1px}.title{font-size:17px;letter-spacing:3px}.recip{font-size:12px}.recip .ln{min-width:160px}}
+@media(max-width:700px){.paper{padding:35px 25px}.paper::after{font-size:110px;letter-spacing:15px}.stamp{width:110px;height:110px;bottom:30px;right:20px;font-size:9px;padding:10px}.stamp .big{font-size:14px}.stamp .org,.stamp .sub{font-size:7px}.header h1{font-size:15px;letter-spacing:1px}.title{font-size:17px;letter-spacing:3px}.recip{font-size:12px}.recip .ln{min-width:160px}.done h2{font-size:16px;letter-spacing:2px;padding:10px}.done .doc{font-size:13px;padding:15px 18px}.done .doc .center{font-size:15px;letter-spacing:3px}}
 </style>
 </head>
 <body>
@@ -80,6 +83,7 @@ body{font-family:"Times New Roman",serif;background:#3d3d3d;padding:20px;display
   <span class="sub">Отдел № 42<br>г. Москва</span>
 </div>
 
+<!-- ═════ ЭКРАН 1: ФОРМА ═════ -->
 <div id="formView">
   <div class="header">
     <h1>Официальное заявление</h1>
@@ -112,26 +116,33 @@ body{font-family:"Times New Roman",serif;background:#3d3d3d;padding:20px;display
     <div class="sigblock">
       <div class="lbl">Подпись заявителя</div>
       <div class="sigrow">
-        <input id="sign" placeholder="Напишите ваше ФИО для подписи" readonly>
-        <button type="button" class="btn-sign" id="signBtn">✍ Поставить подпись</button>
+        <input id="sign" placeholder="Впишите своё ФИО от руки" required>
       </div>
-      <div class="sig-preview" id="sigPrev"></div>
       <div class="sig-date">
-        <span>Дата: <span id="dt">«___» _______ 20___ г.</span></span>
-        <span class="dl">расшифровка</span>
+        <div class="dbox">Дата: <span id="dt">«___» _______ 20___ г.</span></div>
+        <div class="dbox"><span>Расшифровка подписи (ФИО)</span><span id="dec">_______________</span></div>
       </div>
     </div>
 
     <div class="act">
-      <button class="btn" type="submit" id="submitBtn">Подать заявление</button>
+      <button class="btn" type="submit">Подать заявление</button>
       <button class="btn blue" type="button" id="myBtn">📂 Мои заявления (<span id="cnt">0</span>)</button>
       <button class="btn sec" type="reset">Очистить</button>
     </div>
   </form>
-
-  <div class="res" id="res"><h3>✓ Заявление зарегистрировано</h3><pre id="rt"></pre></div>
 </div>
 
+<!-- ═════ ЭКРАН 2: ГОТОВОЕ ЗАЯВЛЕНИЕ ═════ -->
+<div class="done" id="doneView">
+  <h2>✓ Заявление зарегистрировано</h2>
+  <div class="doc" id="docText"></div>
+  <div class="act">
+    <button class="btn" type="button" id="newBtn">Подать ещё одно</button>
+    <button class="btn blue" type="button" id="myBtn2">📂 Мои заявления</button>
+  </div>
+</div>
+
+<!-- ═════ ЭКРАН 3: АРХИВ ═════ -->
 <div class="archive" id="archiveView">
   <h2>Мои заявления</h2>
   <div id="list"></div>
@@ -144,44 +155,36 @@ body{font-family:"Times New Roman",serif;background:#3d3d3d;padding:20px;display
 
 <script>
 const $=id=>document.getElementById(id);
-const f=$('f'),a=$('a'),r=$('r'),res=$('res'),rt=$('rt');
-const formView=$('formView'),archiveView=$('archiveView'),list=$('list'),cnt=$('cnt');
-const signInput=$('sign'),signBtn=$('signBtn'),sigPrev=$('sigPrev');
+const f=$('f'),a=$('a'),r=$('r');
+const formView=$('formView'),doneView=$('doneView'),archiveView=$('archiveView');
+const docText=$('docText'),list=$('list'),cnt=$('cnt');
+const signInput=$('sign');
 const KEY='mvd_zayavy';
 
-a.oninput=()=>{$('ap').textContent=a.value.trim()||'_______________';};
-r.oninput=()=>{$('rp').textContent=r.value.trim()||'_______________';};
-
-const d=new Date(),M=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
-$('dt').textContent=`«${String(d.getDate()).padStart(2,'0')}» ${M[d.getMonth()]} ${d.getFullYear()} г.`;
-
-let isSigned=false;
-signBtn.onclick=()=>{
-  if(!a.value.trim()){alert('Сначала введите ФИО заявителя в первом поле!');return;}
-  if(isSigned){
-    isSigned=false;
-    signInput.value='';
-    signBtn.textContent='✍ Поставить подпись';
-    signBtn.classList.remove('signed');
-    sigPrev.style.display='none';
-  }else{
-    isSigned=true;
-    signInput.value=a.value.trim();
-    signBtn.textContent='✓ Подписано (отменить)';
-    signBtn.classList.add('signed');
-    sigPrev.textContent='Подпись поставлена: '+a.value.trim()+' — '+$('dt').textContent;
-    sigPrev.style.display='block';
-  }
+/* живое превью */
+a.oninput=()=>{
+  $('ap').textContent=a.value.trim()||'_______________';
+  $('dec').textContent=a.value.trim()||'_______________';
 };
+r.oninput=()=>{$('rp').textContent=r.value.trim()||'_______________';};
+signInput.oninput=()=>{$('dec').textContent=signInput.value.trim()||a.value.trim()||'_______________';};
 
+/* дата */
+const d=new Date(),M=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+const todayStr=`«${String(d.getDate()).padStart(2,'0')}» ${M[d.getMonth()]} ${d.getFullYear()} г.`;
+$('dt').textContent=todayStr;
+
+/* хранилище */
 const load=()=>{try{return JSON.parse(localStorage.getItem(KEY))||[]}catch(e){return[]}};
 const save=arr=>localStorage.setItem(KEY,JSON.stringify(arr));
 const updateCnt=()=>{cnt.textContent=load().length};
 updateCnt();
 
+/* ПОДАЧА — форма заменяется готовым заявлением */
 f.onsubmit=e=>{
   e.preventDefault();
-  if(!isSigned){alert('Поставьте подпись перед подачей!');return;}
+  if(!signInput.value.trim()){alert('Впишите своё ФИО в поле подписи!');signInput.focus();return;}
+
   const n='З-'+Math.floor(1000+Math.random()*9000);
   const item={
     id:Date.now(),
@@ -192,43 +195,59 @@ f.onsubmit=e=>{
     target:$('t').value.trim(),
     reason:$('rs').value.trim(),
     action:$('ac').value,
-    signedAt:$('dt').textContent
+    signature:signInput.value.trim(),
+    signedAt:todayStr
   };
   const arr=load();arr.unshift(item);save(arr);updateCnt();
 
-  rt.textContent=`Входящий № ${n} от ${item.date}\n\nКому: ${item.recipient}\nОт: ${item.author}\n\nЗАЯВЛЕНИЕ\n\nПрошу ${item.action} в отношении: ${item.target}.\n\nОбстоятельства: ${item.reason}\n\nПрошу рассмотреть в установленный законом срок и уведомить о решении.\n\nДата: ${item.signedAt}\nПодпись: ______________ / ${item.author} /`;
-  res.style.display='block';
-  res.scrollIntoView({behavior:'smooth',block:'nearest'});
-  resetSign();
-};
+  /* формируем "настоящее" заявление */
+  docText.innerHTML=`
+    <div class="num">Входящий № ${item.num} от ${item.date}</div>
+    <div class="right">Начальнику ${item.recipient}<br>от гражданина(ки) ${item.author}</div>
+    <div class="center">Заявление</div>
+    <p>Прошу ${item.action} в отношении: <b>${item.target}</b>.</p>
+    <p style="margin-top:12px">Обстоятельства: ${item.reason}</p>
+    <p style="margin-top:12px">Прошу рассмотреть настоящее заявление в установленный законом срок и уведомить меня о принятом решении.</p>
+    <div class="sig-line">
+      <div>Дата: ${item.signedAt}</div>
+      <div style="margin-top:10px">Подпись: ______________ / ${item.signature} /</div>
+    </div>
+  `;
 
-function resetSign(){
-  isSigned=false;
-  signInput.value='';
-  signBtn.textContent='✍ Поставить подпись';
-  signBtn.classList.remove('signed');
-  sigPrev.style.display='none';
-}
-
-f.onreset=()=>{
-  res.style.display='none';
-  $('ap').textContent='_______________';
-  $('rp').textContent='_______________';
-  resetSign();
-};
-
-$('myBtn').onclick=()=>{
-  renderList();
+  /* форма ИСЧЕЗАЕТ, показывается готовое заявление */
   formView.style.display='none';
-  archiveView.style.display='block';
+  archiveView.style.display='none';
+  doneView.style.display='block';
   window.scrollTo({top:0,behavior:'smooth'});
 };
-$('backBtn').onclick=()=>{
+
+/* ОЧИСТКА */
+f.onreset=()=>{
+  $('ap').textContent='_______________';
+  $('rp').textContent='_______________';
+  $('dec').textContent='_______________';
+};
+
+/* переключение экранов */
+function showForm(){
+  doneView.style.display='none';
   archiveView.style.display='none';
   formView.style.display='block';
   window.scrollTo({top:0,behavior:'smooth'});
-};
+}
+function showArchive(){
+  renderList();
+  doneView.style.display='none';
+  formView.style.display='none';
+  archiveView.style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+$('myBtn').onclick=showArchive;
+$('myBtn2').onclick=showArchive;
+$('backBtn').onclick=showForm;
+$('newBtn').onclick=()=>{f.reset();showForm();};
 
+/* список */
 function renderList(){
   const arr=load();
   if(!arr.length){
@@ -244,18 +263,18 @@ function renderList(){
       <div class="who"><b>На:</b> ${it.target}</div>
       <div class="snippet">${it.reason.slice(0,120)}${it.reason.length>120?'…':''}</div>
       <div class="who"><b>Мера:</b> ${it.action}</div>
+      <div class="sig">✍ Подписано: ${it.signature} — ${it.signedAt}</div>
       <button class="del" data-id="${it.id}">Удалить</button>
     </div>
   `).join('');
   list.querySelectorAll('.del').forEach(b=>{
     b.onclick=()=>{
       if(!confirm('Удалить это заявление?'))return;
-      const id=Number(b.dataset.id);
-      save(load().filter(x=>x.id!==id));
+      save(load().filter(x=>x.id!==Number(b.dataset.id)));
       updateCnt();renderList();
     };
   });
 }
 </script>
 </body>
-                                              </html>
+</html>
