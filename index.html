@@ -11,7 +11,6 @@ body{font-family:"Times New Roman",serif;background:#3d3d3d;padding:20px;display
 .paper::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#8b0000,#d4af37,#8b0000);z-index:2}
 .paper::after{content:"МВД";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:220px;font-weight:bold;color:rgba(26,58,139,.06);letter-spacing:30px;pointer-events:none;z-index:0}
 
-/* Единственная печать — красная круглая, правый нижний угол */
 .stamp{position:absolute;bottom:60px;right:50px;width:150px;height:150px;border:4px solid #c62828;border-radius:50%;color:#c62828;font-size:11px;font-weight:bold;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transform:rotate(-12deg);opacity:.75;z-index:3;pointer-events:none;padding:15px;line-height:1.3}
 .stamp::before{content:"";position:absolute;inset:9px;border:2px solid #c62828;border-radius:50%}
 .stamp::after{content:"";position:absolute;inset:16px;border:1px dashed #c62828;border-radius:50%}
@@ -32,84 +31,231 @@ body{font-family:"Times New Roman",serif;background:#3d3d3d;padding:20px;display
 .fld textarea{border:1px solid #333;min-height:90px;resize:vertical;padding:8px;background:rgba(255,255,255,.5)}
 .chk{display:flex;align-items:flex-start;gap:10px;margin-bottom:22px;font-size:15px;position:relative;z-index:1}
 .chk input{margin-top:4px;width:18px;height:18px;accent-color:#8b0000}
-.sig{margin-top:45px;display:flex;justify-content:space-between;align-items:flex-end;gap:30px;position:relative;z-index:1}
-.sig .sl{flex:1;border-bottom:1px solid #333;text-align:center;padding-bottom:4px;font-size:12px;color:#555}
-.sig .dl{width:200px;border-bottom:1px solid #333;text-align:center;padding-bottom:4px;font-size:12px;color:#555}
+
+.sigblock{margin-top:35px;position:relative;z-index:1;border:1px dashed #999;padding:15px;background:rgba(255,255,255,.4)}
+.sigblock .lbl{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#555;font-weight:bold;margin-bottom:8px}
+.sigrow{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.sigrow input{flex:1;min-width:180px;border:none;border-bottom:1px solid #333;background:transparent;font-family:"Times New Roman",serif;font-size:18px;padding:6px 4px;outline:none;font-style:italic}
+.sigrow input:focus{border-bottom:2px solid #8b0000}
+.btn-sign{font-family:"Times New Roman",serif;font-size:13px;padding:8px 18px;border:2px solid #1a3a8b;background:#1a3a8b;color:#fff;cursor:pointer;letter-spacing:1px;text-transform:uppercase;font-weight:bold;transition:.2s}
+.btn-sign:hover{background:#26489e}
+.btn-sign.signed{background:#2e7d32;border-color:#2e7d32}
+.sig-preview{margin-top:10px;font-size:12px;color:#2e7d32;font-style:italic;display:none}
+.sig-date{display:flex;justify-content:space-between;margin-top:15px;font-size:12px;color:#555}
+.sig-date .dl{border-bottom:1px solid #333;width:200px;text-align:center;padding-bottom:4px}
+
 .act{margin-top:40px;display:flex;gap:15px;justify-content:center;flex-wrap:wrap;position:relative;z-index:5}
 .btn{font-family:"Times New Roman",serif;font-size:15px;padding:12px 32px;border:2px solid #8b0000;background:#8b0000;color:#fff;cursor:pointer;letter-spacing:2px;text-transform:uppercase;font-weight:bold;transition:.2s}
 .btn:hover{background:#a50000;transform:translateY(-2px);box-shadow:0 5px 15px rgba(139,0,0,.4)}
 .btn.sec{background:transparent;color:#8b0000}
 .btn.sec:hover{background:#8b0000;color:#fff}
+.btn.blue{background:#1a3a8b;border-color:#1a3a8b}
+.btn.blue:hover{background:#26489e;box-shadow:0 5px 15px rgba(26,58,139,.4)}
+
 .res{margin-top:30px;padding:20px;border:2px dashed #8b0000;background:#fff5f5;display:none;font-size:15px;position:relative;z-index:1}
 .res h3{color:#8b0000;margin-bottom:10px;letter-spacing:2px}
 .res pre{white-space:pre-wrap;font-family:"Times New Roman",serif;line-height:1.6}
+
+.archive{display:none;position:relative;z-index:1}
+.archive h2{text-align:center;font-size:22px;letter-spacing:4px;text-transform:uppercase;margin-bottom:25px;border-bottom:2px solid #000;padding-bottom:12px}
+.card{border:1px solid #333;padding:15px 18px;margin-bottom:14px;background:rgba(255,255,255,.6);position:relative}
+.card .num{font-weight:bold;color:#8b0000;font-size:13px;letter-spacing:1px}
+.card .who{font-size:14px;margin:6px 0}
+.card .who b{font-weight:bold}
+.card .when{font-size:11px;color:#777;position:absolute;top:12px;right:15px}
+.card .snippet{font-size:13px;color:#444;font-style:italic;margin:8px 0 10px;line-height:1.4}
+.card .del{position:absolute;bottom:12px;right:15px;font-size:11px;color:#c62828;cursor:pointer;background:none;border:none;font-family:inherit;text-decoration:underline;padding:0}
+.card .del:hover{color:#8b0000}
+.empty{text-align:center;padding:40px 20px;color:#777;font-style:italic;font-size:15px}
+
 @media(max-width:700px){.paper{padding:35px 25px}.paper::after{font-size:110px;letter-spacing:15px}.stamp{width:110px;height:110px;bottom:30px;right:20px;font-size:9px;padding:10px}.stamp .big{font-size:14px}.stamp .org,.stamp .sub{font-size:7px}.header h1{font-size:15px;letter-spacing:1px}.title{font-size:17px;letter-spacing:3px}.recip{font-size:12px}.recip .ln{min-width:160px}}
 </style>
 </head>
 <body>
 <div class="paper">
 
-<!-- Красная круглая печать — правый нижний угол -->
 <div class="stamp">
   <span class="org">МВД РОССИИ</span>
   <span class="big">★</span>
   <span class="sub">Отдел № 42<br>г. Москва</span>
 </div>
 
-<div class="header">
-  <h1>Официальное заявление</h1>
-  <div class="sub">Форма № З-1 · Утверждена приказом № 42 от 01.04</div>
-</div>
-
-<div class="recip">
-  Начальнику <span class="ln" id="rp">_______________</span><br>
-  от гражданина(ки) <span class="ln" id="ap">_______________</span>
-</div>
-
-<div class="title">Заявление</div>
-
-<form id="f">
-  <div class="fld"><label>ФИО заявителя</label><input id="a" required placeholder="Иванов Иван Иванович"></div>
-  <div class="fld"><label>Кому адресовано</label><input id="r" required placeholder="Начальнику отдела кадров Петрову П.П."></div>
-  <div class="fld"><label>На кого жалуемся</label><input id="t" required placeholder="гражданин Сидоров С.С."></div>
-  <div class="fld"><label>Суть заявления</label><textarea id="rs" required placeholder="Прошу принять меры в связи с..."></textarea></div>
-  <div class="fld"><label>Требуемые меры</label><select id="ac">
-    <option>привлечь к ответственности</option>
-    <option>провести проверку</option>
-    <option>разобраться в ситуации</option>
-    <option>объявить выговор</option>
-    <option>выдать справку</option>
-    <option>рассмотреть в установленном порядке</option>
-  </select></div>
-  <div class="chk"><input type="checkbox" id="ag" required><label for="ag">Обязуюсь сообщать достоверные сведения. Об ответственности за заведомо ложный донос предупреждён(а). <em>(ст. 306 УК РФ, если бы это было всерьёз)</em></label></div>
-  <div class="sig"><div class="sl">Подпись / расшифровка</div><div class="dl" id="dt">«___» _______ 20___ г.</div></div>
-  <div class="act">
-    <button class="btn">Подать заявление</button>
-    <button type="reset" class="btn sec">Очистить</button>
+<div id="formView">
+  <div class="header">
+    <h1>Официальное заявление</h1>
+    <div class="sub">Форма № З-1 · Утверждена приказом № 42 от 01.04</div>
   </div>
-</form>
 
-<div class="res" id="res"><h3>✓ Заявление зарегистрировано</h3><pre id="rt"></pre></div>
+  <div class="recip">
+    Начальнику <span class="ln" id="rp">_______________</span><br>
+    от гражданина(ки) <span class="ln" id="ap">_______________</span>
+  </div>
+
+  <div class="title">Заявление</div>
+
+  <form id="f">
+    <div class="fld"><label>ФИО заявителя</label><input id="a" required placeholder="Иванов Иван Иванович"></div>
+    <div class="fld"><label>Кому адресовано</label><input id="r" required placeholder="Начальнику отдела кадров Петрову П.П."></div>
+    <div class="fld"><label>На кого жалуемся</label><input id="t" required placeholder="гражданин Сидоров С.С."></div>
+    <div class="fld"><label>Суть заявления</label><textarea id="rs" required placeholder="Прошу принять меры в связи с..."></textarea></div>
+    <div class="fld"><label>Требуемые меры</label><select id="ac">
+      <option>привлечь к ответственности</option>
+      <option>провести проверку</option>
+      <option>разобраться в ситуации</option>
+      <option>объявить выговор</option>
+      <option>выдать справку</option>
+      <option>рассмотреть в установленном порядке</option>
+    </select></div>
+
+    <div class="chk"><input type="checkbox" id="ag" required><label for="ag">Обязуюсь сообщать достоверные сведения. Об ответственности за заведомо ложный донос предупреждён(а). <em>(ст. 306 УК РФ, если бы это было всерьёз)</em></label></div>
+
+    <div class="sigblock">
+      <div class="lbl">Подпись заявителя</div>
+      <div class="sigrow">
+        <input id="sign" placeholder="Напишите ваше ФИО для подписи" readonly>
+        <button type="button" class="btn-sign" id="signBtn">✍ Поставить подпись</button>
+      </div>
+      <div class="sig-preview" id="sigPrev"></div>
+      <div class="sig-date">
+        <span>Дата: <span id="dt">«___» _______ 20___ г.</span></span>
+        <span class="dl">расшифровка</span>
+      </div>
+    </div>
+
+    <div class="act">
+      <button class="btn" type="submit" id="submitBtn">Подать заявление</button>
+      <button class="btn blue" type="button" id="myBtn">📂 Мои заявления (<span id="cnt">0</span>)</button>
+      <button class="btn sec" type="reset">Очистить</button>
+    </div>
+  </form>
+
+  <div class="res" id="res"><h3>✓ Заявление зарегистрировано</h3><pre id="rt"></pre></div>
+</div>
+
+<div class="archive" id="archiveView">
+  <h2>Мои заявления</h2>
+  <div id="list"></div>
+  <div class="act">
+    <button class="btn" type="button" id="backBtn">← Подать новое заявление</button>
+  </div>
+</div>
+
 </div>
 
 <script>
-const $=id=>document.getElementById(id),f=$('f'),a=$('a'),r=$('r'),res=$('res'),rt=$('rt');
-a.oninput=()=>$('ap').textContent=a.value.trim()||'_______________';
-r.oninput=()=>$('rp').textContent=r.value.trim()||'_______________';
+const $=id=>document.getElementById(id);
+const f=$('f'),a=$('a'),r=$('r'),res=$('res'),rt=$('rt');
+const formView=$('formView'),archiveView=$('archiveView'),list=$('list'),cnt=$('cnt');
+const signInput=$('sign'),signBtn=$('signBtn'),sigPrev=$('sigPrev');
+const KEY='mvd_zayavy';
+
+a.oninput=()=>{$('ap').textContent=a.value.trim()||'_______________';};
+r.oninput=()=>{$('rp').textContent=r.value.trim()||'_______________';};
+
 const d=new Date(),M=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
 $('dt').textContent=`«${String(d.getDate()).padStart(2,'0')}» ${M[d.getMonth()]} ${d.getFullYear()} г.`;
+
+let isSigned=false;
+signBtn.onclick=()=>{
+  if(!a.value.trim()){alert('Сначала введите ФИО заявителя в первом поле!');return;}
+  if(isSigned){
+    isSigned=false;
+    signInput.value='';
+    signBtn.textContent='✍ Поставить подпись';
+    signBtn.classList.remove('signed');
+    sigPrev.style.display='none';
+  }else{
+    isSigned=true;
+    signInput.value=a.value.trim();
+    signBtn.textContent='✓ Подписано (отменить)';
+    signBtn.classList.add('signed');
+    sigPrev.textContent='Подпись поставлена: '+a.value.trim()+' — '+$('dt').textContent;
+    sigPrev.style.display='block';
+  }
+};
+
+const load=()=>{try{return JSON.parse(localStorage.getItem(KEY))||[]}catch(e){return[]}};
+const save=arr=>localStorage.setItem(KEY,JSON.stringify(arr));
+const updateCnt=()=>{cnt.textContent=load().length};
+updateCnt();
+
 f.onsubmit=e=>{
   e.preventDefault();
+  if(!isSigned){alert('Поставьте подпись перед подачей!');return;}
   const n='З-'+Math.floor(1000+Math.random()*9000);
-  rt.textContent=`Входящий № ${n} от ${d.toLocaleDateString('ru-RU')}\n\nКому: ${r.value.trim()}\nОт: ${a.value.trim()}\n\nЗАЯВЛЕНИЕ\n\nПрошу ${$('ac').value} в отношении: ${$('t').value.trim()}.\n\nОбстоятельства: ${$('rs').value.trim()}\n\nПрошу рассмотреть в установленный законом срок и уведомить о решении.\n\nДата: ${$('dt').textContent}\nПодпись: ______________ / ${a.value.trim()} /\n\n———————————————————————\nДокумент сгенерирован в демонстрационных целях. Юридической силы не имеет.`;
+  const item={
+    id:Date.now(),
+    num:n,
+    date:d.toLocaleDateString('ru-RU'),
+    author:a.value.trim(),
+    recipient:r.value.trim(),
+    target:$('t').value.trim(),
+    reason:$('rs').value.trim(),
+    action:$('ac').value,
+    signedAt:$('dt').textContent
+  };
+  const arr=load();arr.unshift(item);save(arr);updateCnt();
+
+  rt.textContent=`Входящий № ${n} от ${item.date}\n\nКому: ${item.recipient}\nОт: ${item.author}\n\nЗАЯВЛЕНИЕ\n\nПрошу ${item.action} в отношении: ${item.target}.\n\nОбстоятельства: ${item.reason}\n\nПрошу рассмотреть в установленный законом срок и уведомить о решении.\n\nДата: ${item.signedAt}\nПодпись: ______________ / ${item.author} /`;
   res.style.display='block';
   res.scrollIntoView({behavior:'smooth',block:'nearest'});
+  resetSign();
 };
+
+function resetSign(){
+  isSigned=false;
+  signInput.value='';
+  signBtn.textContent='✍ Поставить подпись';
+  signBtn.classList.remove('signed');
+  sigPrev.style.display='none';
+}
+
 f.onreset=()=>{
   res.style.display='none';
   $('ap').textContent='_______________';
   $('rp').textContent='_______________';
+  resetSign();
 };
+
+$('myBtn').onclick=()=>{
+  renderList();
+  formView.style.display='none';
+  archiveView.style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+};
+$('backBtn').onclick=()=>{
+  archiveView.style.display='none';
+  formView.style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+};
+
+function renderList(){
+  const arr=load();
+  if(!arr.length){
+    list.innerHTML='<div class="empty">Пока нет ни одного заявления.<br>Подайте первое!</div>';
+    return;
+  }
+  list.innerHTML=arr.map(it=>`
+    <div class="card">
+      <div class="num">№ ${it.num}</div>
+      <div class="when">${it.date}</div>
+      <div class="who"><b>От:</b> ${it.author}</div>
+      <div class="who"><b>Кому:</b> ${it.recipient}</div>
+      <div class="who"><b>На:</b> ${it.target}</div>
+      <div class="snippet">${it.reason.slice(0,120)}${it.reason.length>120?'…':''}</div>
+      <div class="who"><b>Мера:</b> ${it.action}</div>
+      <button class="del" data-id="${it.id}">Удалить</button>
+    </div>
+  `).join('');
+  list.querySelectorAll('.del').forEach(b=>{
+    b.onclick=()=>{
+      if(!confirm('Удалить это заявление?'))return;
+      const id=Number(b.dataset.id);
+      save(load().filter(x=>x.id!==id));
+      updateCnt();renderList();
+    };
+  });
+}
 </script>
 </body>
-</html>
+                                              </html>
